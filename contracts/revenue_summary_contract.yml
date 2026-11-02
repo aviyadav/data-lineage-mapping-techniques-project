@@ -1,0 +1,36 @@
+dataset_name: marts.revenue_summary
+version: 1.0.0
+
+schema_definition:
+  customer_id: INTEGER
+  region: TEXT
+  total_revenue: NUMERIC
+  order_count: BIGINT
+  last_order_at: TIMESTAMP
+
+lineage:
+  upstream_sources:
+    - table: staging.orders
+      version: v1
+      column_mapping:
+        - order_id
+        - customer_id
+        - amount
+        - order_timestamp
+    - table: raw.customers
+      version: v1
+      column_mapping:
+        - customer_id
+        - region
+
+  downstream_consumers:
+    - bi.revenue_dashboard_q3
+
+  transformation_logic: hash://sha256/revenue_summary_sql
+  sensitivity_level: high
+
+sla:
+  freshness: 1 hour
+  availability: 99.5%
+
+owner: finance-data@company.com
