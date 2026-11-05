@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-11-05 22:48:55.287714",
+  "commit_sha": "unknown",
+  "pipeline_version": "unknown",
+  "lineage_graph": {
+    "nodes": [
+      {
+        "id": "orders",
+        "schema": {
+          "id": "int",
+          "amount": "float"
+        }
+      }
+    ],
+    "edges": [
+      [
+        "raw_orders",
+        "orders"
+      ]
+    ]
+  },
+  "schema_versions": {
+    "orders": "4cbfc76015abc25ef330935437dab43c"
+  }
+}
